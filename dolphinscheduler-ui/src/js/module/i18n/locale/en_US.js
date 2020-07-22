@@ -596,6 +596,10 @@ export default {
   'The Worker group no longer exists, please select the correct Worker group!': 'The Worker group no longer exists, please select the correct Worker group!',
   'Please confirm whether the workflow has been saved before downloading': 'Please confirm whether the workflow has been saved before downloading',
   'User name length is between 3 and 39': 'User name length is between 3 and 39',
-  'Wait_sql look interval':'Wait_sql look interval',
+  zkDirectory: 'zkDirectory',
+  'Directory detail': 'Directory detail',
+  'Connection name': 'Connection name',
+  'Current connection settings': 'Current connection settings',
+  'Wait_sql look interval':'Wait_sql look interval',   
   'Wait_sql  result 1 is success':'Wait_sql  result 1 is success'
 }
