@@ -204,7 +204,7 @@ public class TaskPriorityQueueConsumer extends Thread{
 
 
         // SQL task
-        if (taskType == TaskType.SQL){
+        if (taskType == TaskType.SQL || taskType == TaskType.WAIT_SQL){
             setSQLTaskRelation(sqlTaskExecutionContext, taskNode);
 
         }

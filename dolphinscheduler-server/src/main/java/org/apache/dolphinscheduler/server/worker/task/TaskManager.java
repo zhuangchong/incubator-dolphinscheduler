@@ -30,6 +30,7 @@ import org.apache.dolphinscheduler.server.worker.task.shell.ShellTask;
 import org.apache.dolphinscheduler.server.worker.task.spark.SparkTask;
 import org.apache.dolphinscheduler.server.worker.task.sql.SqlTask;
 import org.apache.dolphinscheduler.server.worker.task.sqoop.SqoopTask;
+import org.apache.dolphinscheduler.server.worker.task.waitsql.WaitSqlTask;
 import org.slf4j.Logger;
 
 /**
@@ -68,6 +69,8 @@ public class TaskManager {
         return new DataxTask(taskExecutionContext, logger);
       case SQOOP:
         return new SqoopTask(taskExecutionContext, logger);
+      case WAIT_SQL:
+        return new WaitSqlTask(taskExecutionContext, logger);
       default:
         logger.error("unsupport task type: {}", taskExecutionContext.getTaskType());
         throw new IllegalArgumentException("not support task type");

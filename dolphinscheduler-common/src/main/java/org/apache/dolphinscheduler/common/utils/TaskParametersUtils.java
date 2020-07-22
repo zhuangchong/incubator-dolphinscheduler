@@ -31,6 +31,7 @@ import org.apache.dolphinscheduler.common.task.spark.SparkParameters;
 import org.apache.dolphinscheduler.common.task.sql.SqlParameters;
 import org.apache.dolphinscheduler.common.task.sqoop.SqoopParameters;
 import org.apache.dolphinscheduler.common.task.subprocess.SubProcessParameters;
+import org.apache.dolphinscheduler.common.task.waitsql.WaitSqlParameters;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -77,6 +78,8 @@ public class TaskParametersUtils {
           return JSONUtils.parseObject(parameter, ConditionsParameters.class);
         case SQOOP:
           return JSONUtils.parseObject(parameter, SqoopParameters.class);
+        case WAIT_SQL:
+          return JSONUtils.parseObject(parameter, WaitSqlParameters.class);
         default:
           return null;
       }

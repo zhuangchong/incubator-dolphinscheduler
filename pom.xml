@@ -117,6 +117,7 @@
         <servlet-api.version>2.5</servlet-api.version>
         <swagger.version>1.9.3</swagger.version>
         <springfox.version>2.9.2</springfox.version>
+        <oracle.driver.version>19.3.0.0</oracle.driver.version>
     </properties>
 
     <dependencyManagement>
@@ -349,7 +350,11 @@
                 <groupId>mysql</groupId>
                 <artifactId>mysql-connector-java</artifactId>
                 <version>${mysql.connector.version}</version>
-                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>com.oracle.ojdbc</groupId>
+                <artifactId>ojdbc8</artifactId>
+                <version>${oracle.driver.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.h2database</groupId>

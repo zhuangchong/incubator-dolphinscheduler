@@ -255,6 +255,10 @@ const tasksType = {
     desc: 'SQL',
     color: '#7A98A1'
   },
+  WAIT_SQL: {
+    desc: 'WAIT_SQL',
+    color: '#E46F13'
+  },
   SPARK: {
     desc: 'SPARK',
     color: '#E46F13'

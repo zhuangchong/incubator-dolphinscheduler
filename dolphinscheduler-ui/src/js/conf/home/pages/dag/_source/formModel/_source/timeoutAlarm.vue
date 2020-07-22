@@ -49,7 +49,7 @@
       </div>
       <div class="cont-box">
         <label class="label-box">
-          <x-input v-model="interval" style="width: 200px;" :disabled="isDetails" maxlength="9">
+          <x-input v-model="interval" style="width: 200px;" :disabled="isDetailsTs" maxlength="9">
             <span slot="append">{{$t('Minute')}}</span>
           </x-input>
         </label>
@@ -78,6 +78,12 @@
       backfillItem: Object
     },
     methods: {
+      _changTime(){
+        this.enable=true
+        this.strategy= ['FAILED','WARN']
+        this.interval = 30
+        this.isDetails = true
+      },
       _onSwitch (is) {
         // Timeout strategy
         this.strategy = is ? ['WARN'] : []
@@ -91,7 +97,8 @@
           return false
         }
         // Verify timeout duration Non 0 positive integer
-        if (this.enable && !parseInt(this.interval) && !_.isInteger(this.interval)) {
+        const reg = /^[1-9]\d*$/
+        if (this.enable && !reg.test(this.interval)) {
           this.$message.warning(`${this.$t('Timeout must be a positive integer')}`)
           return false
         }
@@ -120,6 +127,7 @@
         this.enable = o.timeout.enable || false
         this.strategy = _.split(o.timeout.strategy, ',') || ['WARN']
         this.interval = o.timeout.interval || null
+        this.isDetails = o.timeout.isDetails || false
       }
     },
     mounted () {

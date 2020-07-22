@@ -188,6 +188,17 @@
           :create-node-id="id"
           :backfill-item="backfillItem">
         </m-sql>
+
+        <!-- wait_sql node -->
+        <m-wait-sql
+          v-if="taskType === 'WAIT_SQL'"
+          @on-params="_onParams"
+          @on-cache-params="_onCacheParams"
+          ref="WAIT_SQL"
+          :create-node-id="id"
+          :backfill-item="backfillItem">
+        </m-wait-sql>
+
         <!-- spark node -->
         <m-spark
           v-if="taskType === 'SPARK'"
@@ -272,6 +283,7 @@
   import mLog from './log'
   import mMr from './tasks/mr'
   import mSql from './tasks/sql'
+  import mWaitSql from './tasks/wait_sql'
   import i18n from '@/module/i18n'
   import mShell from './tasks/shell'
   import mSpark from './tasks/spark'
@@ -602,7 +614,7 @@
           fromThis: this
         })
       }
-    }, 
+    },
     watch: {
       /**
        * Watch the item change, cache the value it changes
@@ -715,6 +727,7 @@
       mShell,
       mSubProcess,
       mProcedure,
+      mWaitSql,
       mSql,
       mLog,
       mSpark,
