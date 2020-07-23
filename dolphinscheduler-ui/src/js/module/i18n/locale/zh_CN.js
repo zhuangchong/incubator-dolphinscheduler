@@ -605,6 +605,7 @@ export default {
   'Directory detail': '查看目录详情',
   'Connection name': '连线名',
   'Current connection settings': '当前连线设置',
+  'Please save the DAG before formatting': '格式化前请先保存DAG',
   'Wait_sql look interval':'循环触发间隔',   
   'Wait_sql  result 1 is success':'等待任务结果返回1则成功'
 }

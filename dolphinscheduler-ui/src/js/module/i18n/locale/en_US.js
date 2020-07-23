@@ -600,6 +600,7 @@ export default {
   'Directory detail': 'Directory detail',
   'Connection name': 'Connection name',
   'Current connection settings': 'Current connection settings',
+  'Please save the DAG before formatting': 'Please save the DAG before formatting',
   'Wait_sql look interval':'Wait_sql look interval',   
   'Wait_sql  result 1 is success':'Wait_sql  result 1 is success'
 }

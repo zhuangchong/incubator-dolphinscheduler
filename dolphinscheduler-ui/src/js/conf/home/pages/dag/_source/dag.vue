@@ -170,6 +170,10 @@
 
       // DAG automatic layout
       dagAutomaticLayout() {
+        if(this.store.state.dag.isEditDag) {
+          this.$message.warning(`${i18n.$t('Please save the DAG before formatting')}`)
+          return false
+        }
         $('#canvas').html('')
 
       // Destroy round robin
@@ -515,6 +519,7 @@
           eventModel.remove()
         }
         eventModel = this.$drawer({
+          className: 'dagMask',
           render (h) {
             return h(mFormLineModel,{
               on: {
@@ -587,6 +592,7 @@
           closable: false,
           direction: 'right',
           escClose: true,
+          className: 'dagMask',
           render: h => h(mFormModel, {
             on: {
               addTaskInfo ({ item, fromThis }) {
