@@ -83,10 +83,6 @@ JSP.prototype.init = function ({ dag, instance, options }) {
 
   // Monitor line click
   this.JspInstance.bind('click', e => {
-    // Untie event
-  if (this.config.isDblclick) {
-    findComponentDownward(this.dag.$root, 'dag-chart')._createLineLabel({id: e._jsPlumb.overlays.label.canvas.id, sourceId: e.sourceId, targetId: e.targetId})
-    }
     if (this.config.isClick) {
       this.connectClick(e)
     }
@@ -482,9 +478,9 @@ JSP.prototype.handleEventRemove = function () {
 JSP.prototype.removeNodes = function ($id) {
   // Delete node processing(data-targetarr)
   _.map(tasksAll(), v => {
-    const targetarr = v.targetarr.split(',')
+    let targetarr = v.targetarr.split(',')
     if (targetarr.length) {
-      const newArr = _.filter(targetarr, v1 => v1 !== $id)
+      let newArr = _.filter(targetarr, v1 => v1 !== $id)
       $(`#${v.id}`).attr('data-targetarr', newArr.toString())
     }
   })
@@ -496,6 +492,15 @@ JSP.prototype.removeNodes = function ($id) {
 
   // callback onRemoveNodes event
   this.options && this.options.onRemoveNodes && this.options.onRemoveNodes($id)
+  let connects = []
+  _.map(this.JspInstance.getConnections(), v => {
+    connects.push({
+      endPointSourceId: v.sourceId,
+      endPointTargetId: v.targetId
+    })
+  })
+  // Storage line dependence
+  store.commit('dag/setConnects', connects)
 }
 
 /**
@@ -506,8 +511,8 @@ JSP.prototype.removeConnect = function ($connect) {
     return
   }
   // Remove connections and remove node and node dependencies
-  const targetId = $connect.targetId
-  const sourceId = $connect.sourceId
+  let targetId = $connect.targetId
+  let sourceId = $connect.sourceId
   let targetarr = rtTargetarrArr(targetId)
   if (targetarr.length) {
     targetarr = _.filter(targetarr, v => v !== sourceId)
@@ -623,10 +628,10 @@ JSP.prototype.saveStore = function () {
     // task
     _.map(_.cloneDeep(store.state.dag.tasks), v => {
       if (is(v.id)) {
-        const preTasks = []
-        const id = $(`#${v.id}`)
-        const tar = id.attr('data-targetarr')
-        const idDep = tar ? id.attr('data-targetarr').split(',') : []
+        let preTasks = []
+        let id = $(`#${v.id}`)
+        let tar = id.attr('data-targetarr')
+        let idDep = tar ? id.attr('data-targetarr').split(',') : []
         if (idDep.length) {
           _.map(idDep, v1 => {
             preTasks.push($(`#${v1}`).find('.name-p').text())
@@ -645,39 +650,13 @@ JSP.prototype.saveStore = function () {
         tasks.push(tasksParam)
       }
     })
-    if(store.state.dag.connects.length ===this.JspInstance.getConnections().length) {
-      _.map(store.state.dag.connects, u => {
-        connects.push({
-          endPointSourceId: u.endPointSourceId,
-          endPointTargetId: u.endPointTargetId,
-          label: u.label
-        })
-      })
-    } else if(store.state.dag.connects.length>0 && store.state.dag.connects.length < this.JspInstance.getConnections().length) {
-      _.map(this.JspInstance.getConnections(), v => {
-        connects.push({
-          endPointSourceId: v.sourceId,
-          endPointTargetId: v.targetId,
-          label: v._jsPlumb.overlays.label.canvas.innerText
-        })
-      })
-      _.map(store.state.dag.connects, u => {
-        _.map(connects, v => {
-          if(u.label && u.endPointSourceId === v.endPointSourceId && u.endPointTargetId===v.endPointTargetId) {
-            v.label = u.label
-          }
-        })
-      })
-    } else if(store.state.dag.connects.length===0) {
-      _.map(this.JspInstance.getConnections(), v => {
-        connects.push({
-          endPointSourceId: v.sourceId,
-          endPointTargetId: v.targetId,
-          label: v._jsPlumb.overlays.label.canvas.innerText
-        })
-      })
-    }
     
+    _.map(this.JspInstance.getConnections(), v => {
+      connects.push({
+        endPointSourceId: v.sourceId,
+        endPointTargetId: v.targetId
+      })
+    })
     _.map(tasksAll(), v => {
       locations[v.id] = {
         name: v.name,
@@ -770,7 +749,6 @@ JSP.prototype.jspBackfill = function ({ connects, locations, largeJson }) {
     _.map(connects, v => {
       let sourceId = v.endPointSourceId.split('-')
       let targetId = v.endPointTargetId.split('-')
-      let labels = v.label
       if (sourceId.length === 4 && targetId.length === 4) {
         sourceId = `${sourceId[0]}-${sourceId[1]}-${sourceId[2]}`
         targetId = `${targetId[0]}-${targetId[1]}-${targetId[2]}`
@@ -786,7 +764,7 @@ JSP.prototype.jspBackfill = function ({ connects, locations, largeJson }) {
           type: 'basic',
           paintStyle: { strokeWidth: 2, stroke: '#4caf50' },
           HoverPaintStyle: {stroke: '#ccc', strokeWidth: 3},
-          overlays:[["Label", { label: labels} ]]
+          overlays:[["Label", { label: i18n.$t('success'), location:0.5, id:"label"} ]]
         })
       } else if($(`#${sourceId}`).attr('data-tasks-type') === 'CONDITIONS' && $(`#${sourceId}`).attr('data-failednode') === $(`#${targetId}`).find('.name-p').text()) {
         this.JspInstance.connect({
@@ -795,7 +773,7 @@ JSP.prototype.jspBackfill = function ({ connects, locations, largeJson }) {
           type: 'basic',
           paintStyle: { strokeWidth: 2, stroke: '#252d39' },
           HoverPaintStyle: {stroke: '#ccc', strokeWidth: 3},
-          overlays:[["Label", { label: labels} ]]
+          overlays:[["Label", { label: i18n.$t('failed'), location:0.5, id:"label"} ]]
         })
       } else {
         this.JspInstance.connect({
@@ -803,8 +781,7 @@ JSP.prototype.jspBackfill = function ({ connects, locations, largeJson }) {
           target: targetId,
           type: 'basic',
           paintStyle: { strokeWidth: 2, stroke: '#2d8cf0' },
-          HoverPaintStyle: {stroke: '#ccc', strokeWidth: 3},
-          overlays:[["Label", { label: labels} ]]
+          HoverPaintStyle: {stroke: '#ccc', strokeWidth: 3}
         })
       }
     })
