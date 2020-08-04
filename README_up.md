@@ -52,7 +52,6 @@ CDH jar 替换
 ## jar 漏洞
 
 * fastjson =1.2.72
-* jackson-databind =2.11.1
 
 ---
 
