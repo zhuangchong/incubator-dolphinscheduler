@@ -601,6 +601,7 @@ export default {
   'Connection name': 'Connection name',
   'Current connection settings': 'Current connection settings',
   'Please save the DAG before formatting': 'Please save the DAG before formatting',
+  'This canvas is abnormal and the node connection cannot be made. Please save or exit the current workflow': 'This canvas is abnormal and the node connection cannot be made. Please save or exit the current workflow',
   'Wait_sql look interval':'Wait_sql look interval',   
   'Wait_sql  result 1 is success':'Wait_sql  result 1 is success'
 }

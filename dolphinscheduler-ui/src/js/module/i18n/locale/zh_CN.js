@@ -609,4 +609,7 @@ export default {
   'Please save the DAG before formatting': '格式化前请先保存DAG',
   'Wait_sql look interval':'循环触发间隔',   
   'Wait_sql  result 1 is success':'等待任务结果返回1则成功'
+  'This canvas is abnormal and the node connection cannot be made. Please save or exit the current workflow': '此画布异常，无法进行节点连线，请保存或退出当前工作流',
+  'Wait_sql look interval':'循环触发间隔',   
+  'Wait_sql  result 1 is success':'等待任务结果返回1则成功'
 }
