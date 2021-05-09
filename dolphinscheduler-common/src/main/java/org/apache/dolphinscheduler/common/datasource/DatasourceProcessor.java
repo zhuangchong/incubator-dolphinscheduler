@@ -33,7 +33,7 @@ public interface DatasourceProcessor {
     /**
      * create BaseDataSourceParamDTO by connectionJson
      *
-     * @param connectionJson see{@link org.apache.dolphinscheduler.dao.entity.Datasource}
+     * @param connectionJson see{@link org.apache.dolphinscheduler.common.datasource.BaseConnectionParam}
      * @return {@link BaseDataSourceParamDTO}
      */
     BaseDataSourceParamDTO createDatasourceParamDTO(String connectionJson);

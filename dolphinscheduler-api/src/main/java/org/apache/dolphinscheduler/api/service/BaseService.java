@@ -95,7 +95,7 @@ public interface BaseService {
      *
      * @param startDateStr start date string
      * @param endDateStr end date string
-     * @return map<status,startDate,endDate>
+     * @return map result, key is status,startDate,endDate
      */
     Map<String, Object> checkAndParseDateParameters(String startDateStr, String endDateStr);
 }

@@ -288,7 +288,7 @@ public class MasterBaseTaskExecThread implements Callable<Boolean> {
     }
 
     /**
-     * handle time out for time out strategy warn&&failed
+     * handle time out for time out strategy warn and failed
      */
     protected void handleTimeoutFailed() {
         if (TaskTimeoutStrategy.WARN == this.taskTimeoutParameter.getStrategy()) {

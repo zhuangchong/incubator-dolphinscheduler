@@ -82,11 +82,13 @@ public class UsersController extends BaseController {
      * @param loginUser    login user
      * @param userName     user name
      * @param userPassword user password
-     * @param email        email
      * @param tenantId     tenant id
-     * @param phone        phone
      * @param queue        queue
+     * @param email        email
+     * @param phone        phone
+     * @param state        state
      * @return create result code
+     * @throws Exception exception
      */
     @ApiOperation(value = "createUser", notes = "CREATE_USER_NOTES")
     @ApiImplicitParams({
@@ -146,7 +148,6 @@ public class UsersController extends BaseController {
         return returnDataListPaging(result);
     }
 
-
     /**
      * update user
      *
@@ -154,11 +155,13 @@ public class UsersController extends BaseController {
      * @param id           user id
      * @param userName     user name
      * @param userPassword user password
-     * @param email        email
-     * @param tenantId     tennat id
-     * @param phone        phone
      * @param queue        queue
+     * @param email        email
+     * @param tenantId     tenant id
+     * @param phone        phone
+     * @param state        state
      * @return update result code
+     * @throws Exception exception
      */
     @ApiOperation(value = "updateUser", notes = "UPDATE_USER_NOTES")
     @ApiImplicitParams({
@@ -194,6 +197,7 @@ public class UsersController extends BaseController {
      * @param loginUser login user
      * @param id        user id
      * @return delete result code
+     * @throws Exception exception
      */
     @ApiOperation(value = "delUserById", notes = "DELETE_USER_BY_ID_NOTES")
     @ApiImplicitParams({
@@ -282,7 +286,6 @@ public class UsersController extends BaseController {
         return returnDataList(result);
     }
 
-
     /**
      * grant datasource
      *
@@ -306,7 +309,6 @@ public class UsersController extends BaseController {
         Map<String, Object> result = usersService.grantDataSource(loginUser, userId, datasourceIds);
         return returnDataList(result);
     }
-
 
     /**
      * get user info
@@ -340,7 +342,6 @@ public class UsersController extends BaseController {
         return returnDataList(result);
     }
 
-
     /**
      * user list no paging
      *
@@ -355,7 +356,6 @@ public class UsersController extends BaseController {
         Map<String, Object> result = usersService.queryUserList(loginUser);
         return returnDataList(result);
     }
-
 
     /**
      * verify username
@@ -435,7 +435,7 @@ public class UsersController extends BaseController {
      * @param repeatPassword repeat password
      * @param email          user email
      */
-    @ApiOperation(value="registerUser",notes = "REGISTER_USER_NOTES")
+    @ApiOperation(value = "registerUser",notes = "REGISTER_USER_NOTES")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "userName", value = "USER_NAME", type = "String"),
             @ApiImplicitParam(name = "userPassword", value = "USER_PASSWORD", type = "String"),
@@ -449,7 +449,7 @@ public class UsersController extends BaseController {
     public Result<Object> registerUser(@RequestParam(value = "userName") String userName,
                                @RequestParam(value = "userPassword") String userPassword,
                                @RequestParam(value = "repeatPassword") String repeatPassword,
-                               @RequestParam(value = "email") String email) throws Exception {
+                               @RequestParam(value = "email") String email) {
         userName = ParameterUtils.handleEscapes(userName);
         userPassword = ParameterUtils.handleEscapes(userPassword);
         repeatPassword = ParameterUtils.handleEscapes(repeatPassword);
@@ -463,7 +463,7 @@ public class UsersController extends BaseController {
      *
      * @param userName       user name
      */
-    @ApiOperation(value="activateUser",notes = "ACTIVATE_USER_NOTES")
+    @ApiOperation(value = "activateUser",notes = "ACTIVATE_USER_NOTES")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "userName", value = "USER_NAME", type = "String"),
     })

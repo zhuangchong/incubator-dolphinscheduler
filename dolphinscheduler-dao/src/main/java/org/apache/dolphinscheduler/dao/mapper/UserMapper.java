@@ -104,7 +104,7 @@ public interface UserMapper extends BaseMapper<User> {
 
     /**
      * check the user exist
-     * @param queueName queue name
+     * @param queue queue name
      * @return true if exist else return null
      */
     Boolean existUser(@Param("queue") String queue);

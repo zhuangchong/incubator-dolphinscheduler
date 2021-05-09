@@ -151,7 +151,7 @@ public class BaseServiceImpl implements BaseService {
      *
      * @param startDateStr start date string
      * @param endDateStr end date string
-     * @return map<status,startDate,endDate>
+     * @return map result, key is status,startDate,endDate
      */
     @Override
     public Map<String, Object> checkAndParseDateParameters(String startDateStr, String endDateStr) {

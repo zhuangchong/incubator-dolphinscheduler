@@ -118,12 +118,9 @@ public class DataSourceServiceImpl extends BaseServiceImpl implements DataSource
     /**
      * updateProcessInstance datasource
      *
-     * @param loginUser login user
-     * @param name data source name
-     * @param desc data source description
-     * @param type data source type
-     * @param parameter datasource parameters
      * @param id data source id
+     * @param loginUser login user
+     * @param dataSourceParam data source params
      * @return update result code
      */
     @Override
@@ -179,6 +176,12 @@ public class DataSourceServiceImpl extends BaseServiceImpl implements DataSource
         return result;
     }
 
+    /**
+     * Check if the data source exists by name
+     *
+     * @param name datasource name
+     * @return return true if datasource exists
+     */
     private boolean checkName(String name) {
         List<DataSource> queryDataSource = dataSourceMapper.queryDataSourceByName(name.trim());
         return queryDataSource != null && !queryDataSource.isEmpty();
@@ -311,8 +314,8 @@ public class DataSourceServiceImpl extends BaseServiceImpl implements DataSource
     /**
      * check connection
      *
-     * @param type data source type
-     * @param parameter data source parameters
+     * @param type      data source type
+     * @param connectionParam datasource connection param
      * @return true if connect successfully, otherwise false
      */
     @Override

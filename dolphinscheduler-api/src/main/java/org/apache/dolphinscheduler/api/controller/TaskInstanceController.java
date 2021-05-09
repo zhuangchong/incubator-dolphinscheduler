@@ -58,7 +58,6 @@ import springfox.documentation.annotations.ApiIgnore;
 @RequestMapping("/projects/{projectName}/task-instance")
 public class TaskInstanceController extends BaseController {
 
-
     @Autowired
     TaskInstanceService taskInstanceService;
 

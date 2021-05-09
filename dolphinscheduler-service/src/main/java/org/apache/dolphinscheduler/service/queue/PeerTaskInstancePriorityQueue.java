@@ -50,7 +50,7 @@ public class PeerTaskInstancePriorityQueue implements TaskPriorityQueue<TaskInst
      * put task instance to priority queue
      *
      * @param taskInstance taskInstance
-     * @throws TaskPriorityQueueException
+     * @throws TaskPriorityQueueException TaskPriorityQueueException
      */
     @Override
     public void put(TaskInstance taskInstance) throws TaskPriorityQueueException {
@@ -61,7 +61,7 @@ public class PeerTaskInstancePriorityQueue implements TaskPriorityQueue<TaskInst
      * take task info
      *
      * @return task instance
-     * @throws TaskPriorityQueueException
+     * @throws TaskPriorityQueueException TaskPriorityQueueException
      */
     @Override
     public TaskInstance take() throws TaskPriorityQueueException {
@@ -74,11 +74,10 @@ public class PeerTaskInstancePriorityQueue implements TaskPriorityQueue<TaskInst
      * WARN: Please use PriorityBlockingQueue if you want to use poll(timeout, unit)
      * because this method of override interface used without considering accuracy of timeout
      *
-     * @param timeout
-     * @param unit
+     * @param timeout timeout
+     * @param unit unit
      * @return
-     * @throws TaskPriorityQueueException
-     * @throws InterruptedException
+     * @throws TaskPriorityQueueException TaskPriorityQueueException
      */
     @Override
     public TaskInstance poll(long timeout, TimeUnit unit) throws TaskPriorityQueueException {

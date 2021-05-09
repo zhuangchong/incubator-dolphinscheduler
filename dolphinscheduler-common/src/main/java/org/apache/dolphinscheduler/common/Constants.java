@@ -561,7 +561,7 @@ public final class Constants {
     public static final String HADOOP = "hadoop";
 
     /**
-     * -D <property>=<value>
+     * -D property=value
      */
     public static final String D = "-D";
 
@@ -1077,7 +1077,7 @@ public final class Constants {
     public static final String PSTREE = "pstree";
 
     /**
-     * docker & kubernetes
+     * docker and kubernetes
      */
     public static final boolean DOCKER_MODE = StringUtils.isNotEmpty(System.getenv("DOCKER"));
     public static final boolean KUBERNETES_MODE = StringUtils.isNotEmpty(System.getenv("KUBERNETES_SERVICE_HOST")) && StringUtils.isNotEmpty(System.getenv("KUBERNETES_SERVICE_PORT"));

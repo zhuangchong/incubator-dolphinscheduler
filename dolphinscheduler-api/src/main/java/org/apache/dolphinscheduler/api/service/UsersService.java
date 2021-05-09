@@ -41,7 +41,7 @@ public interface UsersService {
      * @param phone phone
      * @param queue queue
      * @return create result code
-     * @throws Exception exception
+     * @throws IOException IOException
      */
     Map<String, Object> createUser(User loginUser, String userName, String userPassword, String email,
                                    int tenantId, String phone, String queue, int state) throws IOException;
@@ -127,7 +127,7 @@ public interface UsersService {
      * @param phone phone
      * @param queue queue
      * @return update result code
-     * @throws Exception exception
+     * @throws IOException IOException
      */
     Map<String, Object> updateUser(User loginUser, int userId, String userName, String userPassword, String email,
                                    int tenantId, String phone, String queue, int state) throws IOException;
@@ -138,7 +138,7 @@ public interface UsersService {
      * @param loginUser login user
      * @param id user id
      * @return delete result code
-     * @throws Exception exception when operate hdfs
+     * @throws IOException exception when operate hdfs
      */
     Map<String, Object> deleteUserById(User loginUser, int id) throws IOException;
 
@@ -246,7 +246,6 @@ public interface UsersService {
      * @param repeatPassword repeat password
      * @param email email
      * @return register result code
-     * @throws Exception exception
      */
     Map<String, Object> registerUser(String userName, String userPassword, String repeatPassword, String email);
 

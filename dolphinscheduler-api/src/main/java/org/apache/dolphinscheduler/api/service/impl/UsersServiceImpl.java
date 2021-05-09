@@ -125,7 +125,7 @@ public class UsersServiceImpl extends BaseServiceImpl implements UsersService {
      * @param phone phone
      * @param queue queue
      * @return create result code
-     * @throws Exception exception
+     * @throws IOException IOException
      */
     @Override
     @Transactional(rollbackFor = Exception.class)
@@ -174,6 +174,18 @@ public class UsersServiceImpl extends BaseServiceImpl implements UsersService {
 
     }
 
+    /**
+     * create user
+     *
+     * @param userName user name
+     * @param userPassword user password
+     * @param email email
+     * @param tenantId tenant id
+     * @param phone phone
+     * @param queue queue
+     * @param state state
+     * @return user info
+     */
     @Override
     @Transactional(rollbackFor = RuntimeException.class)
     public User createUser(String userName,
@@ -206,8 +218,13 @@ public class UsersServiceImpl extends BaseServiceImpl implements UsersService {
         return user;
     }
 
-    /***
+    /**
      * create User for ldap login
+     *
+     * @param userType user type
+     * @param userId user id
+     * @param email email
+     * @return user info
      */
     @Override
     @Transactional(rollbackFor = Exception.class)
@@ -250,6 +267,12 @@ public class UsersServiceImpl extends BaseServiceImpl implements UsersService {
         return userMapper.selectById(id);
     }
 
+    /**
+     * query users by ids
+     *
+     * @param ids id list
+     * @return users
+     */
     @Override
     public List<User> queryUser(List<Integer> ids) {
         if (CollectionUtils.isEmpty(ids)) {
@@ -347,7 +370,7 @@ public class UsersServiceImpl extends BaseServiceImpl implements UsersService {
      * @param phone phone
      * @param queue queue
      * @return update result code
-     * @throws Exception exception
+     * @throws IOException IOException
      */
     @Override
     public Map<String, Object> updateUser(User loginUser, int userId,
@@ -479,7 +502,7 @@ public class UsersServiceImpl extends BaseServiceImpl implements UsersService {
      * @param loginUser login user
      * @param id user id
      * @return delete result code
-     * @throws Exception exception when operate hdfs
+     * @throws IOException exception when operate hdfs
      */
     @Override
     public Map<String, Object> deleteUserById(User loginUser, int id) throws IOException {
@@ -865,11 +888,11 @@ public class UsersServiceImpl extends BaseServiceImpl implements UsersService {
      * unauthorized user
      *
      * @param loginUser login user
-     * @param alertgroupId alert group id
+     * @param alertGroupId alert group id
      * @return unauthorize result code
      */
     @Override
-    public Map<String, Object> unauthorizedUser(User loginUser, Integer alertgroupId) {
+    public Map<String, Object> unauthorizedUser(User loginUser, Integer alertGroupId) {
 
         Map<String, Object> result = new HashMap<>();
         //only admin can operate
@@ -883,7 +906,7 @@ public class UsersServiceImpl extends BaseServiceImpl implements UsersService {
         if (userList != null && !userList.isEmpty()) {
             userSet = new HashSet<>(userList);
 
-            List<User> authedUserList = userMapper.queryUserListByAlertGroupId(alertgroupId);
+            List<User> authedUserList = userMapper.queryUserListByAlertGroupId(alertGroupId);
 
             Set<User> authedUserSet = null;
             if (authedUserList != null && !authedUserList.isEmpty()) {
@@ -902,17 +925,17 @@ public class UsersServiceImpl extends BaseServiceImpl implements UsersService {
      * authorized user
      *
      * @param loginUser login user
-     * @param alertgroupId alert group id
+     * @param alertGroupId alert group id
      * @return authorized result code
      */
     @Override
-    public Map<String, Object> authorizedUser(User loginUser, Integer alertgroupId) {
+    public Map<String, Object> authorizedUser(User loginUser, Integer alertGroupId) {
         Map<String, Object> result = new HashMap<>();
         //only admin can operate
         if (check(result, !isAdmin(loginUser), Status.USER_NO_OPERATION_PERM)) {
             return result;
         }
-        List<User> userList = userMapper.queryUserListByAlertGroupId(alertgroupId);
+        List<User> userList = userMapper.queryUserListByAlertGroupId(alertGroupId);
         result.put(Constants.DATA_LIST, userList);
         putMsg(result, Status.SUCCESS);
 
@@ -995,7 +1018,6 @@ public class UsersServiceImpl extends BaseServiceImpl implements UsersService {
      * @param repeatPassword repeat password
      * @param email email
      * @return register result code
-     * @throws Exception exception
      */
     @Override
     @Transactional(rollbackFor = RuntimeException.class)

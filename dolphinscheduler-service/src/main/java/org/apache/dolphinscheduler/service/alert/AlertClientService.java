@@ -58,6 +58,9 @@ public class AlertClientService {
 
     /**
      * alert client
+     *
+     * @param host host
+     * @param port port
      */
     public AlertClientService(String host, int port) {
         this.clientConfig = new NettyClientConfig();
@@ -78,10 +81,11 @@ public class AlertClientService {
 
     /**
      * alert sync send data
-     * @param groupId
-     * @param title
-     * @param content
-     * @return
+     *
+     * @param groupId group id
+     * @param title title
+     * @param content content
+     * @return alert send response command
      */
     public AlertSendResponseCommand sendAlert(int groupId, String title,  String content) {
         return this.sendAlert(this.host,this.port,groupId,title,content);
@@ -89,12 +93,13 @@ public class AlertClientService {
 
     /**
      * alert sync send data
+     *
      * @param host host
      * @param port port
      * @param groupId groupId
      * @param title title
      * @param content content
-     * @return AlertSendResponseCommand
+     * @return alert send response command
      */
     public AlertSendResponseCommand sendAlert(String host, int port, int groupId, String title,  String content) {
         logger.info("sync alert send, host : {}, port : {}, groupId : {}, title : {} ", host, port, groupId, title);

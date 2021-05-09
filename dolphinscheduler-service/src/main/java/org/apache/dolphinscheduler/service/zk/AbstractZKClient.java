@@ -106,7 +106,7 @@ public abstract class AbstractZKClient extends RegisterOperator {
      * get server zk nodes.
      *
      * @param zkNodeType zookeeper node type
-     * @return result : list<zknode>
+     * @return zkNode list result
      */
     public List<String> getServerZkNodes(ZKNodeType zkNodeType) {
         String path = getZNodeParentPath(zkNodeType);
@@ -165,7 +165,7 @@ public abstract class AbstractZKClient extends RegisterOperator {
      *
      * @param zkNodeType zookeeper node type
      * @param hostOnly host only
-     * @return result : set<host>
+     * @return host set result
      */
     public Set<String> getServerNodeSet(ZKNodeType zkNodeType, boolean hostOnly) {
         Set<String> serverSet = new HashSet<>();
@@ -189,7 +189,7 @@ public abstract class AbstractZKClient extends RegisterOperator {
      *
      * @param zkNodeType zookeeper node type
      * @param hostOnly host only
-     * @return result : list<host>
+     * @return host list result
      */
     public List<String> getServerNodeList(ZKNodeType zkNodeType, boolean hostOnly) {
         Set<String> serverSet = getServerNodeSet(zkNodeType, hostOnly);

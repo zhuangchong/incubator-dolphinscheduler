@@ -31,7 +31,7 @@ public interface TaskPriorityQueue<T> {
      * put task info
      *
      * @param taskInfo taskInfo
-     * @throws TaskPriorityQueueException
+     * @throws TaskPriorityQueueException TaskPriorityQueueException
      */
     void put(T taskInfo) throws TaskPriorityQueueException;
 
@@ -39,26 +39,28 @@ public interface TaskPriorityQueue<T> {
      * take taskInfo
      *
      * @return taskInfo
-     * @throws TaskPriorityQueueException
+     * @throws TaskPriorityQueueException TaskPriorityQueueException
+     * @throws InterruptedException InterruptedException
      */
     T take() throws TaskPriorityQueueException, InterruptedException;
 
 
     /**
      * poll taskInfo with timeout
-     * @param timeout
-     * @param unit
+     *
+     * @param timeout timeout
+     * @param unit unit
      * @return
-     * @throws TaskPriorityQueueException
-     * @throws InterruptedException
+     * @throws TaskPriorityQueueException TaskPriorityQueueException
+     * @throws InterruptedException InterruptedException
      */
     T poll(long timeout, TimeUnit unit) throws TaskPriorityQueueException, InterruptedException;
 
     /**
-     * size
+     * queue size
      *
-     * @return size
-     * @throws TaskPriorityQueueException
+     * @return size size
+     * @throws TaskPriorityQueueException TaskPriorityQueueException
      */
     int size() throws TaskPriorityQueueException;
 }

@@ -44,7 +44,7 @@ public class TaskPriorityQueueImpl implements TaskPriorityQueue<TaskPriority> {
      * put task takePriorityInfo
      *
      * @param taskPriorityInfo takePriorityInfo
-     * @throws TaskPriorityQueueException
+     * @throws TaskPriorityQueueException TaskPriorityQueueException
      */
     @Override
     public void put(TaskPriority taskPriorityInfo) throws TaskPriorityQueueException {
@@ -55,7 +55,8 @@ public class TaskPriorityQueueImpl implements TaskPriorityQueue<TaskPriority> {
      * take taskInfo
      *
      * @return taskInfo
-     * @throws TaskPriorityQueueException
+     * @throws TaskPriorityQueueException TaskPriorityQueueException
+     * @throws InterruptedException InterruptedException
      */
     @Override
     public TaskPriority take() throws TaskPriorityQueueException, InterruptedException {
@@ -65,14 +66,13 @@ public class TaskPriorityQueueImpl implements TaskPriorityQueue<TaskPriority> {
     /**
      * poll taskInfo with timeout
      *
-     * @param timeout
-     * @param unit
+     * @param timeout timeout
+     * @param unit unit
      * @return
-     * @throws TaskPriorityQueueException
-     * @throws InterruptedException
+     * @throws InterruptedException InterruptedException
      */
     @Override
-    public TaskPriority poll(long timeout, TimeUnit unit) throws TaskPriorityQueueException, InterruptedException {
+    public TaskPriority poll(long timeout, TimeUnit unit) throws InterruptedException {
         return queue.poll(timeout,unit);
     }
 
@@ -80,7 +80,7 @@ public class TaskPriorityQueueImpl implements TaskPriorityQueue<TaskPriority> {
      * queue size
      *
      * @return size
-     * @throws TaskPriorityQueueException
+     * @throws TaskPriorityQueueException TaskPriorityQueueException
      */
     @Override
     public int size() throws TaskPriorityQueueException {
