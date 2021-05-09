@@ -309,6 +309,9 @@ public class ProcessService {
 
     /**
      * get task node list by definitionId
+     *
+     * @param defineId process definition Id
+     * @return taskNode list result
      */
     public List<TaskNode> getTaskNodeListByDefinitionId(Integer defineId) {
         ProcessDefinition processDefinition = processDefineMapper.selectById(defineId);
@@ -1075,6 +1078,12 @@ public class ProcessService {
         return processMapStr;
     }
 
+    /**
+     * get globalParams map result
+     *
+     * @param globalParams global params
+     * @return globalParams map result
+     */
     public Map<String, String> getGlobalParamMap(String globalParams) {
         List<Property> propList;
         Map<String, String> globalParamMap = new HashMap<>();
@@ -1088,6 +1097,12 @@ public class ProcessService {
 
     /**
      * create sub work process command
+     *
+     * @param parentProcessInstance parent process instance
+     * @param childInstance childInstance
+     * @param instanceMap instanceMap
+     * @param task task
+     * @return command
      */
     public Command createSubProcessCommand(ProcessInstance parentProcessInstance,
                                            ProcessInstance childInstance,
