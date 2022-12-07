@@ -66,6 +66,9 @@ export function useTable(onEdit: Function) {
         title: t('project.task.task_name'),
         key: 'taskName',
         ...COLUMN_WIDTH_CONFIG['linkName'],
+        resizable: true,
+        minWidth: 200,
+        maxWidth: 600,
         render: (row: IRecord) =>
           h(
             ButtonLink,
@@ -74,18 +77,23 @@ export function useTable(onEdit: Function) {
             },
             {
               default: () =>
-                h(
-                  NEllipsis,
-                  COLUMN_WIDTH_CONFIG['linkEllipsis'],
-                  () => row.taskName
-                )
+                  h(
+                      NEllipsis,
+                      {
+                        style: 'max-width: 580px;line-height: 1.5'
+                      },
+                      () => row.taskName
+                  )
             }
           )
       },
       {
         title: t('project.task.workflow_name'),
         key: 'processDefinitionName',
-        ...COLUMN_WIDTH_CONFIG['name']
+        ...COLUMN_WIDTH_CONFIG['name'],
+        resizable: true,
+        minWidth: 200,
+        maxWidth: 600
       },
       {
         title: t('project.task.workflow_state'),
